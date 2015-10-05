@@ -7,7 +7,7 @@ class MyProjectComponent extends ProjectComponent {
   override def projectClosed(): Unit = ()
   override def projectOpened(): Unit = ()
   override def initComponent(): Unit = {
-    val system = ActorSystem("my-actor", MyAkkaConfig.config)
+    val system = ActorSystem("my-actor", MyAkkaConfig.config, this.getClass.getClassLoader)
     val actor = system.actorOf(Props[MyActor])
     actor ! "Hello!"
   }
