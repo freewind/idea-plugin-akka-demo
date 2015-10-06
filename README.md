@@ -48,3 +48,11 @@ com.intellij.diagnostic.PluginException: ClassNotFoundException: akka.actor.Ligh
 
 The `akka.actor.LightArrayRevolverScheduler` is used in `MyAkkaConfig.scala`, and is included in `akka-actor_2.11:2.3.12:jar`. But why IDEA can't load it?
 
+Fix
+---
+
+If we pass the correct classLoader, all the problems are gone:
+
+```
+val system = ActorSystem("my-actor", classLoader = Some(this.getClass.getClassLoader))
+```
